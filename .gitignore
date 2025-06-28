@@ -23,7 +23,7 @@
 hs_err_pid*
 replay_pid*
 
-# Spring Boot specific
+# Spring Boot specific - Producto branch
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
