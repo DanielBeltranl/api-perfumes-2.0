@@ -1,6 +1,6 @@
 FROM eclipse-temurin:22-jdk-jammy AS build
 WORKDIR /app
-COPY . .
+COPY Perfulandia-perfulandia-cliente .
 RUN chmod +x mvnw
 RUN ./mvnw clean package -DskipTests
 
