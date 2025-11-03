@@ -50,9 +50,8 @@ public class PagoServices {
 
     public ClienteModel obtenerCliente (Long id){
 
-        //url de la API cliente
 
-        String url = "https://perfulandia-cliente-1.onrender.com/perfulandia/api/clientes/" + id;
+        String url = "https://perfumes-2-0.onrender.com/perfulandia/api/clientes/" + id;
 
         ClienteModel cliente = restTemplate.getForObject(url, ClienteModel.class);
 
@@ -62,7 +61,7 @@ public class PagoServices {
 
     public EnvioPOJO obtenerEnvio (long id){
 
-        String url = "https://perfulandia-envio.onrender.com/perfulandia/api/envios/" + id;
+        String url = "https://api-envio.onrender.com/perfulandia/api/envios/" + id;
 
         EnvioPOJO envio = restTemplate.getForObject(url, EnvioPOJO.class);
 
@@ -71,7 +70,7 @@ public class PagoServices {
 
     public ProductoPOJO obtenerProducto (long id){
 
-        String url = "https://perfulandia-producto-3.onrender.com/perfulandia/api/producto/" + id;
+        String url = "https://api-producto-a8sl.onrender.com/perfulandia/api/producto/" + id;
 
         ProductoPOJO producto = restTemplate.getForObject(url, ProductoPOJO.class);
 
