@@ -31,6 +31,13 @@ public class Cliente {
     @Column (name = "direccion_cliente", nullable = false)
     private String direccion_cliente;
 
+    @Column (name = "contrasena")
+    private String contrasena;
+
+    @Column (name = "correo")
+    private String correo;
+
+
     public Long getId_cliente() {
         return id_cliente;
     }
@@ -69,5 +76,21 @@ public class Cliente {
 
     public void setRun_cliente(String run_cliente) {
         this.run_cliente = run_cliente;
+    }
+
+    public String getContraseña() {
+        return contrasena;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contrasena = contraseña;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 }

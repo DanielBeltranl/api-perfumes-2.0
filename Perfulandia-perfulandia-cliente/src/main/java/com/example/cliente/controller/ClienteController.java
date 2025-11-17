@@ -1,6 +1,7 @@
 package com.example.cliente.controller;
 
 import com.example.cliente.model.Cliente;
+import com.example.cliente.model.LoginDTO;
 import com.example.cliente.repository.ClienteRepository;
 import com.example.cliente.service.ClienteService;
 import jakarta.persistence.Id;
@@ -88,17 +89,25 @@ public class ClienteController {
 private ResponseEntity<Cliente> eliminarCliente (@PathVariable Long id){
 
         try {
-
             clienteService.deleteById(id);
-
             return ResponseEntity.noContent().build();
-
         }catch (Exception e){
-
             return ResponseEntity.notFound().build();
         }
 
-
 }
 
+@PostMapping("/login")
+    private ResponseEntity<Cliente> loginCliente (@RequestBody LoginDTO login){
+        try{
+            Cliente cli= clienteService.login(login.getCorreo(), login.getContrasena());
+            if(cli==null){
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            }
+            return ResponseEntity.ok(cli);
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 }

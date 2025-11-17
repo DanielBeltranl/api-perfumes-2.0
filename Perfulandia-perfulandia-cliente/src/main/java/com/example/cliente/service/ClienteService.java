@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClienteService {
@@ -38,6 +39,12 @@ public class ClienteService {
     public void deleteById (Long id){
 
         clienteRepository.deleteById(id);
+
+    }
+
+    public Cliente login (String email, String password){
+
+        return clienteRepository.findByContrasenaAndCorreo(password, email);
 
     }
 
