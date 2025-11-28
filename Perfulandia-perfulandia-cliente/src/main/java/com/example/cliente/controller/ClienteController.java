@@ -4,6 +4,7 @@ import com.example.cliente.model.Cliente;
 import com.example.cliente.model.LoginDTO;
 import com.example.cliente.repository.ClienteRepository;
 import com.example.cliente.service.ClienteService;
+import com.fasterxml.jackson.databind.JsonNode;
 import jakarta.persistence.Id;
 import jakarta.persistence.PostLoad;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,4 +111,19 @@ private ResponseEntity<Cliente> eliminarCliente (@PathVariable Long id){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
+  @PostMapping("/datos-cliente")
+  private ResponseEntity<Cliente> findByCorreo(@RequestBody JsonNode payload) {
+    try {
+        Cliente cli = clienteService.findByCorreo(payload.get("correo").asText());
+        if (cli == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.ok(cli);
+    } catch (Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+  }
+
+
 }

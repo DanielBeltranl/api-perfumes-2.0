@@ -48,4 +48,9 @@ public class ClienteService {
 
     }
 
+    public Cliente findByCorreo (String correo){
+        Optional<Cliente> clienteOpt = clienteRepository.findByCorreo(correo);
+        return clienteOpt.orElse(null);
+    }
+
 }
