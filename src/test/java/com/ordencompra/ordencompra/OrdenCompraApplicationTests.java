@@ -1,0 +1,13 @@
+package com.ordencompra.ordencompra;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class OrdenCompraApplicationTests {
+
+    @Test
+    void contextLoads() {
+    }
+
+}
