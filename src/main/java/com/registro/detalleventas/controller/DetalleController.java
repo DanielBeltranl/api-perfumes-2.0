@@ -27,7 +27,7 @@ public class DetalleController {
                 ResponseFormat response = new ResponseFormat(204, "No hay detalle spara la venta", null);
                 return ResponseEntity.status(HttpStatus.NO_CONTENT).body(response);
             }
-            ResponseFormat response = new ResponseFormat(200, "Lisa recuperada exitosamente", lista);
+            ResponseFormat response = new ResponseFormat(200, "Lista recuperada exitosamente", lista);
             return ResponseEntity.status(HttpStatus.OK).body(response);
         }catch (Exception e){
             ResponseFormat response = new ResponseFormat(500, e.getMessage(), null);

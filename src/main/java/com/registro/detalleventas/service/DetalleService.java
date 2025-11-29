@@ -18,7 +18,7 @@ public class DetalleService {
     private DetalleRepository detalleRepository;
 
     public List<DetalleVenta> getDetalle(Long idVenta){
-        return detalleRepository.findByIdVenta(idVenta);
+        return detalleRepository.findAllByIdVenta(idVenta);
     }
 
     public List<DetalleVenta> saveDetalle(List<DetalleVenta> detalle){
