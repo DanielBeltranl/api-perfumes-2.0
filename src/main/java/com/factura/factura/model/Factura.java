@@ -21,7 +21,7 @@ public class Factura {
     @Column(name = "id_factura", nullable = false )
     private Long idFactura;
 
-    @Column (name = "id_venta", nullable = false)
+    @JoinColumn (name = "id_venta", nullable = false)
     private Long idVenta;
 
     @Column (name = "nombre_cliente", nullable = false)
