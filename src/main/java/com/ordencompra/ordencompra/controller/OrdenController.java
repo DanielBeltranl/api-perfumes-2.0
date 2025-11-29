@@ -28,10 +28,16 @@ public class OrdenController {
             }
             OrdenCompra orden = ordenService.guardarOrden(ordenCompra);
 
-            //asignar id de la venta
+
             List<DetalleVenta> lista = orden.getDetalleVenta();
             lista.forEach(detalleVenta -> {detalleVenta.setIdVenta(orden.getIdVenta());});
-            //terminar asignacion porque no hay BD aun
+            System.out.println(lista);
+            ResponseFormat responseDetalle = ordenService.guardarDetalle(lista);
+
+            if(responseDetalle.getStatusCode()!=201){
+                ResponseFormat response = new ResponseFormat(500, responseDetalle.getStatusMessage(), null);
+                return ResponseEntity.status(500).body(response);
+            }
 
             ResponseFormat response = new ResponseFormat(200, "Orden de compra guardado", orden);
            return ResponseEntity.status(200).body(response);
