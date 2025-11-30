@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: api-orden-compra
+    name: api-orden-compra-p3
     env: docker
 
     repo: https://github.com/DanielBeltranl/Perfumes-2.0.git
