@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Orden de Compra</title>
+    <style>
+        :root { --accent: #2a9d8f; --accent-dark: #237866; --muted: #6b6b6b; }
+        body { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 12px; color: #222; margin: 0; padding: 16px; }
+        .container { width: 100%; margin: 0 auto; }
+        .header { text-align: center; margin-bottom: 12px; }
+        .header h1 { margin: 0; color: var(--accent-dark); font-size: 20px; }
+        .header .meta { color: var(--muted); font-size: 11px; margin-top: 4px; }
+        .row { display: block; overflow: hidden; margin-bottom: 12px; }
+        .col-left, .col-right { display: inline-block; vertical-align: top; width: 49%; box-sizing: border-box; }
+        .col-right { text-align: right; }
+        .info p { margin: 3px 0; font-size: 12px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 6px; margin-bottom: 12px; }
+        th, td { border: 1px solid #e0e0e0; padding: 8px 10px; font-size: 12px; }
+        th { background: #f3faf8; color: var(--accent-dark); text-align: left; }
+        .right { text-align: right; }
+        .center { text-align: center; }
+        tfoot td { font-weight: bold; background: #fafafa; }
+        .totals .label { text-align: right; padding-right: 12px; }
+        .note { margin-top: 14px; color: var(--muted); font-size: 11px; }
+        @page { margin: 12mm; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>Orden de Compra</h1>
+        <div class="meta" th:text="'Orden ID: ' + ${orden.idVenta}">Orden ID</div>
+    </div>
+
+    <div class="row">
+        <div class="col-left info">
+            <p><strong>Cliente:</strong> <span th:text="${orden.nombreCliente}">Nombre</span> <span th:text="${orden.apellidoCliente}">Apellido</span></p>
+            <p><strong>RUN:</strong> <span th:text="${orden.runCliente}">RUN</span></p>
+            <p><strong>Dirección:</strong> <span th:text="${orden.direccionEnvio}">Dirección</span></p>
+            <p><strong>Comuna:</strong> <span th:text="${orden.comuna}">Comuna</span></p>
+        </div>
+
+        <div class="col-right info">
+            <p><strong>Teléfono:</strong> <span th:text="${orden.telefonoContacto}">Tel</span></p>
+            <p><strong>Fecha:</strong> <span th:text="${#dates.format(#dates.createNow(), 'dd/MM/yyyy')}">dd/MM/yyyy</span></p>
+        </div>
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th style="width:6%;">N°</th>
+            <th>Producto</th>
+            <th class="right" style="width:18%;">Precio Unitario</th>
+            <th class="center" style="width:10%;">Cantidad</th>
+            <th class="right" style="width:18%;">Subtotal</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="det, iterStat : ${orden.detalleVenta}">
+            <td th:text="${iterStat.index + 1}">1</td>
+            <td th:text="${det.nombreProducto}">Producto</td>
+            <td class="right" th:text="${#numbers.formatDecimal(det.precioUnitario, 0, 'COMMA', 2, 'POINT')}">0</td>
+            <td class="center" th:text="${det.cantidad}">0</td>
+            <!-- calculamos el subtotal en la plantilla usando precio * cantidad -->
+            <td class="right" th:text="${#numbers.formatDecimal(det.precioUnitario * det.cantidad, 0, 'COMMA', 2, 'POINT')}">0</td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="4" class="right totals label">Total bruto</td>
+            <td class="right" th:text="${#numbers.formatDecimal(totalBruto, 0, 'COMMA', 2, 'POINT')}">0</td>
+        </tr>
+        <tr>
+            <td colspan="4" class="right totals label">IVA (19%)</td>
+            <td class="right" th:text="${#numbers.formatDecimal(iva, 0, 'COMMA', 2, 'POINT')}">0</td>
+        </tr>
+        <tr>
+            <td colspan="4" class="right totals label">Total con IVA</td>
+            <td class="right" th:text="${#numbers.formatDecimal(totalConIva, 0, 'COMMA', 2, 'POINT')}">0</td>
+        </tr>
+        </tfoot>
+    </table>
+
+    <div class="note">
+        <p>Valide los datos de la boleta. Ante cualquier duda contacte al servicio al cliente.</p>
+    </div>
+</div>
+</body>
+</html>

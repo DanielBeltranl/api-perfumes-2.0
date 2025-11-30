@@ -1,0 +1,12 @@
+com\ordencompra\ordencompra\OrdenCompraApplication.class
+com\ordencompra\ordencompra\model\OrdenCompra$OrdenCompraBuilder.class
+com\ordencompra\ordencompra\service\OrdenService.class
+com\ordencompra\ordencompra\repository\OrdenRepository.class
+com\ordencompra\ordencompra\controller\OrdenController.class
+com\ordencompra\ordencompra\config\RestTemplateConfig.class
+com\ordencompra\ordencompra\config\CorsConfig$1.class
+com\ordencompra\ordencompra\model\ResponseFormat.class
+com\ordencompra\ordencompra\config\CorsConfig.class
+com\ordencompra\ordencompra\model\DetalleVenta$DetalleVentaBuilder.class
+com\ordencompra\ordencompra\model\OrdenCompra.class
+com\ordencompra\ordencompra\model\DetalleVenta.class
