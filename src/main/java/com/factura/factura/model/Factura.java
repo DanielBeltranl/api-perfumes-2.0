@@ -1,6 +1,5 @@
 package com.factura.factura.model;
 
-
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -41,5 +40,8 @@ public class Factura {
 
     @Column(name = "estado_despacho", nullable = false)
     private String estadoDespacho;
+
+    @Transient
+    private List<DetalleVenta> detalleVenta;
 
 }

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Factura</title>
+    <style>
+        body { font-family: DejaVu Sans, Arial, sans-serif; font-size: 12px; color: #222; }
+        .container { width: 100%; margin: 0 auto; }
+        .header { text-align: center; margin-bottom: 10px; }
+        .header h1 { margin: 0; }
+        .cliente, .meta { margin-bottom: 8px; }
+        .two-cols { display: flex; justify-content: space-between; margin-bottom: 10px; }
+        .left, .right { width: 48%; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 10px; }
+        th, td { border: 1px solid #ddd; padding: 6px 8px; }
+        th { background: #f5f5f5; text-align: left; }
+        .right-align { text-align: right; }
+        tfoot td { font-weight: bold; }
+        .estado { padding: 8px; border: 1px solid #ccc; background: #fafafa; margin-top: 8px; }
+        .nota { font-size: 11px; color: #666; margin-top: 12px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>Factura</h1>
+        <div th:text="'Factura ID: ' + ${factura.idFactura}">Factura ID</div>
+    </div>
+
+    <div class="two-cols">
+        <div class="left">
+            <div class="cliente">
+                <p><strong>Cliente:</strong> <span th:text="${factura.nombreCliente}">Nombre</span> <span th:text="${factura.apellidoCliente}">Apellido</span></p>
+                <p><strong>RUN:</strong> <span th:text="${factura.runCliente}">RUN</span></p>
+                <p><strong>Id de la venta:</strong> <span th:text="${factura.idVenta}">idVenta</span></p>
+            </div>
+        </div>
+
+        <div class="right">
+            <div class="meta">
+                <p><strong>Fecha emisión:</strong> <span th:text="${factura.fechaEmision}">fecha</span></p>
+                <p><strong>Estado despacho:</strong> <span th:text="${factura.estadoDespacho}">Pendiente</span></p>
+            </div>
+        </div>
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>N°</th>
+            <th>Producto</th>
+            <th class="right-align">Precio Unitario</th>
+            <th class="right-align">Cantidad</th>
+            <th class="right-align">Subtotal</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="det, iterStat : ${factura.detalleVenta}">
+            <td th:text="${iterStat.index + 1}">1</td>
+            <td th:text="${det.nombreProducto}">Producto</td>
+            <td class="right-align" th:text="${#numbers.formatDecimal(det.precioUnitario, 0, 'COMMA', 2, 'POINT')}">0</td>
+            <td class="right-align" th:text="${det.cantidad}">0</td>
+            <td class="right-align" th:text="${#numbers.formatDecimal(det.precioUnitario * det.cantidad, 0, 'COMMA', 2, 'POINT')}">0</td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="4" class="right-align">Total bruto</td>
+            <td class="right-align" th:text="${#numbers.formatDecimal(totalBruto, 0, 'COMMA', 2, 'POINT')}">0</td>
+        </tr>
+        <tr>
+            <td colspan="4" class="right-align">IVA (19%)</td>
+            <td class="right-align" th:text="${#numbers.formatDecimal(iva, 0, 'COMMA', 2, 'POINT')}">0</td>
+        </tr>
+        <tr>
+            <td colspan="4" class="right-align">Total con IVA</td>
+            <td class="right-align" th:text="${#numbers.formatDecimal(totalConIva, 0, 'COMMA', 2, 'POINT')}">0</td>
+        </tr>
+        </tfoot>
+    </table>
+
+    <div class="estado">
+        <strong>Estado de despacho:</strong>
+        <span th:text="${factura.estadoDespacho}">Pendiente</span>
+    </div>
+
+    <div class="nota">
+        <p>Gracias por su compra.</p>
+    </div>
+</div>
+</body>
+</html>
