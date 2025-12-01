@@ -85,12 +85,6 @@ public class OrdenService {
         return detalles;
     }
 
-    public ResponseFormat generarFactura(FacturaDTO factura){
-
-
-
-    }
-
 
 
 
